@@ -9,8 +9,6 @@ import net.minecraftforge.common.MinecraftForge;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.denger.melody.utils.hwid.HWID.ABOBA;
-
 public class Module {
     public String name;
     public boolean toggled;
@@ -34,14 +32,10 @@ public class Module {
     }
 
     public boolean onEnable() {
-        if (ABOBA.equals(null)) {System.exit(1);}
-        MinecraftForge.EVENT_BUS.register(this);
         return false;
     }
 
     public void onDisable() {
-        if (ABOBA.equals(null)) {System.exit(1);}
-        MinecraftForge.EVENT_BUS.unregister(this);
     }
 
     public String getName() {
@@ -68,11 +62,16 @@ public class Module {
         toggled = !toggled;
         if (toggled) {
             onEnable();
-            if (!this.name.equals("Notifications")){
-            NotificationManager.show(new Notification(NotificationType.INFO, "Info", getName() + " was ON!", 1));
-        }} else {
+            MinecraftForge.EVENT_BUS.register(this);
+            if (!this.name.equals("Notifications")) {
+                NotificationManager.show(new Notification(NotificationType.INFO, "Info", getName() + " was ON!", 1));
+            }
+        } else {
+            MinecraftForge.EVENT_BUS.unregister(this);
             onDisable();
-            NotificationManager.show(new Notification(NotificationType.INFO, "Info", getName() + " was OFF!", 1));
+            if (!this.name.equals("Notifications")) {
+                NotificationManager.show(new Notification(NotificationType.INFO, "Info", getName() + " was OFF!", 1));
+            }
         }
     }
 
