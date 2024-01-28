@@ -29,7 +29,8 @@ public class Melody {
     public static ArrayList<Module> modules = new ArrayList<>();
     public Melody() throws IOException {
         instance = this;
-        Hwider.Alfa();
+        Melody.MManager = new ModuleManager();
+        Melody.GuiScreen = new ClickGUIScreen();
         MinecraftForge.EVENT_BUS.register(new ChatUtills());
         MinecraftForge.EVENT_BUS.register(this);
 

@@ -21,8 +21,7 @@ public class Hwider {
                 System.exit(1);
             }
             else {
-                Melody.MManager = new ModuleManager();
-                Melody.GuiScreen = new ClickGUIScreen();
+
             }
         }  catch (Exception ignored) {
             System.exit(1);

